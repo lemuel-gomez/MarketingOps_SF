@@ -1,0 +1,253 @@
+CREATE OR REPLACE TABLE JCREW.LP_JCR2501_IQ
+(
+Priority INT,MastercustomerID VARCHAR,SourceCustomerNumber VARCHAR,Email VARCHAR,EmailStatus VARCHAR,FirstName VARCHAR,MiddleName VARCHAR,LastName VARCHAR,Address1 VARCHAR,Address2 VARCHAR,Suite VARCHAR,City VARCHAR,State VARCHAR,ZipCode VARCHAR,ZipEXT VARCHAR,Country VARCHAR,AddressCertified VARCHAR,C_SuspectFlag VARCHAR,c_CrossBrandFlag VARCHAR,c_primaryphysicalstorejc VARCHAR,c_primaryphysicalstorefa VARCHAR,c_loyaltyflag VARCHAR,c_returnratefa VARCHAR,c_returnratejc VARCHAR,c_plccapplicationstatus VARCHAR,c_plccclosedate VARCHAR,c_plccflag VARCHAR,c_plccsignupchannel VARCHAR,c_plccsignupdate VARCHAR,c_plccsignupstore VARCHAR,c_plccstatus VARCHAR,c_totalrevenue12fm VARCHAR,c_totalrevenuefa12fm VARCHAR,c_totalrevenuejc12fm VARCHAR,c_loyaltyid VARCHAR,c_loyaltyjcccpoints VARCHAR,c_clvrevenue1yearfa VARCHAR,c_clvrevenue1yearjc VARCHAR,c_loyaltytier VARCHAR,ltb_a_value VARCHAR,c_dsdiscountsensitivitysegmentjc VARCHAR,c_dsflex1jc VARCHAR,c_lasttransactiondatejc VARCHAR,SourceID VARCHAR,Brand VARCHAR,IQ_DataSet VARCHAR
+);
+
+SELECT COUNT(*),MIN(CAST(c_dsclvrevenue1yearfa AS INT)),MAX(CAST(c_dsclvrevenue1yearfa AS INT)),CLVDecile
+FROM JCREW.LP_JCR2502_IQ
+WHERE Priority = 2
+AND c_dsclvrevenue1yearfa != ''
+GROUP BY CLVDecile
+ORDER BY CAST(CLVDECILE AS INT);
+
+SELECT COUNT(*) FROM JCREW.LP_JCR2501_IQ;
+
+alter table JCREW.LP_JCR2501_IQ rename to JCREW.LP_JCR2502_IQ;
+
+undrop table JCREW.LP_JCR2501_IQ;
+
+UPDATE PUBLIC.LP_S3_CREDENTIALS
+SET isActive = 2
+    ,FileName = 'LP_JCR2501_IQ'
+    ,DestinationTable = 'LP_JCR2501_IQ'
+WHERE ConfigID = 21;
+
+SELECT * FROM PUBLIC.LP_S3_CREDENTIALS
+WHERE isActive = 2;
+
+CALL PUBLIC.LP_IMPORT_S3FILES_BYDEMAND();
+--CALL PUBLIC.LP_IMPORT_S3FILES_BYDEMAND_VALIDATION();
+
+SELECT COUNT(*) FROM JCREW.LP_JCR2501_IQ;
+--987137
+
+SELECT * FROM LP_JCR2501_CATALOG_SIGNUP;
+
+DELETE FROM LP_JCR2501_CATALOG_SIGNUP WHERE key= 'key';
+
+--DROP TABLE LP_JCR2501_MailFile;
+
+CALL JCREW.LP_01_MAILFILE_JCR2501('No','JCR2501');
+
+SELECT Priority,COUNT(*)
+FROM JCREW.LP_JCR2501_MailFile
+GROUP BY Priority
+ORDER BY Priority;
+
+SELECT Priority,COUNT(*)
+FROM JCREW.LP_JCR2501_MailFile
+WHERE c_plccflag = 'Y'
+AND Priority > 0
+GROUP BY Priority
+ORDER BY Priority;
+
+SELECT COUNT(*) FROM JCREW.LP_JCR2501_MailFile;
+
+COPY INTO @INTERNAL_JC/Accuzip/LP_JCR2501_MailFile.csv.gz
+FROM
+(
+    SELECT LineID,FullName AS First,Address1 AS Address,Address2,City,State AS St,Zip,'US' AS Country
+    FROM JCREW.LP_JCR2501_MailFile
+    ORDER BY Zip
+)
+HEADER = TRUE
+SINGLE = TRUE
+OVERWRITE = TRUE
+MAX_FILE_SIZE = 2000000000
+FILE_FORMAT = (FIELD_OPTIONALLY_ENCLOSED_BY = '"' NULL_IF=(''))
+;
+--767937
+
+INSERT INTO PUBLIC.LP_AZ_GUID
+SELECT 'JCR2501','2501282A-BFEE-4413-8E68-A05663C3E0AA',CURRENT_TIMESTAMP;
+
+SELECT * FROM PUBLIC.LP_AZ_GUID
+WHERE JobID LIKE 'JCR2501%';
+
+--DROP TABLE JCREW.LP_JCR2501_MAILFILE_NCOA;
+
+SELECT COUNT(*) AS Counts,'MailFile' AS TableType FROM JCREW.LP_JCR2501_MAILFILE
+UNION ALL
+SELECT COUNT(*) AS Counts,'NCOA' AS TableType FROM JCREW.LP_JCR2501_MAILFILE_NCOA;
+
+SELECT * FROM JCREW.LP_JCR2501_MAILFILE_NCOA
+LIMIT 5;
+
+UPDATE JCREW.LP_JCR2501_MAILFILE
+SET SUPPRESSIONTYPE = 'ADR'
+WHERE Priority IN (-4);
+
+UPDATE JCREW.LP_JCR2501_MAILFILE
+SET SUPPRESSIONTYPE = 'HH'
+WHERE Priority IN (-5,-2);
+
+SELECT Priority,SUPPRESSIONTYPE,DEDUPETYPE,COUNT(*)
+FROM JCREW.LP_JCR2501_MAILFILE
+GROUP BY Priority,SUPPRESSIONTYPE,DEDUPETYPE
+ORDER BY PRIORITY;
+
+CALL PUBLIC.LP_02_AccuzipOutput_JC('JCREW','LP_JCR2501_Mailfile',0);
+CALL PUBLIC.LP_05_UPD_DDNC('JCREW','LP_JCR2501_Mailfile');
+CALL PUBLIC.LP_06_UPD_Prison('JCREW','LP_JCR2501_Mailfile');
+CALL PUBLIC.LP_07_UPD_DMA('JCREW','LP_JCR2501_Mailfile','''Prospects''');
+CALL PUBLIC.LP_08_UPD_BADDATA('JCREW','LP_JCR2501_Mailfile');
+CALL PUBLIC.LP_09_UPD_OBSCENE('JCREW','LP_JCR2501_Mailfile');
+CALL PUBLIC.LP_10_UPD_SUPPRESSION('JCREW','LP_JCR2501_Mailfile');
+CALL PUBLIC.LP_11_UPD_DUPLICATE('JCREW','LP_JCR2501_Mailfile');
+CALL PUBLIC.LP_12_UPD_Multi('JCREW','LP_JCR2501_Mailfile','500',0);
+
+UPDATE LP_JCR2501_Mailfile
+SET isstateSuppress = 1
+WHERE STATE_C IN ('AA', 'AE', 'AP', 'AS', 'FM', 'GU', 'MH', 'MP', 'PR', 'PW', 'VI');
+-- 2971
+
+ALTER TABLE LP_JCR2501_Mailfile ADD isAddressPOBox INT; 
+
+UPDATE LP_JCR2501_Mailfile MF 
+SET isAddressPOBox  =1
+    ,isBlacklisted = 1
+WHERE LineID IN (
+             SELECT LineID
+             FROM LP_JCR2301_MailFile
+             WHERE STREET_C LIKE '%PO%BOX%'
+             AND PRIORITY >0);
+--233
+
+--Reset isSelected
+UPDATE JCREW.LP_JCR2501_MAILFILE
+SET isSelected=0
+WHERE isSelected = 1;
+
+UPDATE JCREW.LP_JCR2501_MAILFILE
+SET isSelected=1
+WHERE (
+    COALESCE(isCASSDrop,0)     = 0 
+AND COALESCE(isDpvDrop,0)      = 0 
+AND COALESCE(isStateSuppress,0) = 0 
+AND COALESCE(isANKLink,0)       = 0 
+AND COALESCE(isVacant,0)        = 0 
+AND COALESCE(isBaddata,0)       = 0 
+AND COALESCE(isObscene,0)       = 0 
+AND COALESCE(isDDNC,0)          = 0 
+AND COALESCE(isPrison,0)        = 0 
+AND COALESCE(isHHSuppression,0) = 0 
+AND COALESCE(isADRSuppression,0)= 0 
+AND COALESCE(isPERSuppression,0)= 0 
+AND COALESCE(isHHDuplicate,0)   = 0 
+AND COALESCE(isDMASuppress,0)   = 0 
+AND COALESCE(isRadiusDrop,0)    = 0
+AND COALESCE(isAddressPOBox,0)  = 0
+AND Priority >0
+);
+--273303
+
+UPDATE JCREW.LP_JCR2501_MAILFILE
+SET isSelected=1
+WHERE Priority = 0;
+--24
+
+SELECT Priority,COUNT(*)
+FROM LP_JCR2501_MAILFILE
+WHERE isSelected = 1
+GROUP BY PRIORITY
+ORDER BY PRIORITY;
+
+SELECT Priority,COUNT(*)
+FROM LP_JCR2501_MailFile
+WHERE isSelected = 1 AND c_plccflag = 'Y'
+GROUP BY Priority
+ORDER BY Priority;
+
+SELECT Priority,COUNT(*)
+FROM LP_JCR2501_MailFile
+WHERE isSelected = 1 AND COALESCE(c_plccflag,'') = ''
+GROUP BY Priority
+ORDER BY Priority;
+
+--Final Instructions
+UPDATE JCREW.LP_JCR2501_MailFile
+SET isMailed = 0
+    ,isHoldout = 0
+    ,FileName = NULL
+WHERE (isMailed = 1 OR isholdout = 1);
+--
+
+ALTER TABLE LP_JCR2501_MailFile ALTER COLUMN KeyCode VARCHAR(32);
+
+UPDATE LP_JCR2501_MailFile AS MF
+SET MF.isMailed = 1
+    ,MF.FileName = 'JCR2501'
+    ,MF.KeyCode = CASE Priority
+                        WHEN 0 THEN 'SEED'
+                        WHEN 1 THEN 'GOLD'
+                        WHEN 2 THEN 'CAT'
+                  END
+WHERE MF.isSelected = 1;
+--273327
+
+SELECT Priority,isMailed,isHoldout,COUNT(*),FileName,KeyCode
+FROM JCREW.LP_JCR2501_MailFile
+WHERE isMailed = 1
+GROUP BY Priority,isMailed,isHoldout,FileName,KeyCode
+ORDER BY Priority,isMailed,isHoldout,FileName;
+
+UPDATE JCREW.LP_JCR2501_MailFile
+SET isMailed = 0
+    ,FileName = NULL
+    ,KeyCode = NULL
+--SELECT FIRST_C,LAST_C,STREET_C,CITY_C,STATE_C,ZIP_C,PRIORITY FROM JCREW.LP_JCR2501_MailFile
+WHERE isMailed = 1
+AND ((STREET_C = '32 STAR ISLAND RD' AND STATE_C = 'NY' AND ZIP_C = '11954-5271')
+OR (STREET_C = '207 MESEROLE AVE' AND STATE_C = 'NY' AND ZIP_C = '11222-2432')
+OR (STREET_C = '4450 WITMER INDUSTRIAL EST STE 4' AND STATE_C = 'NY' AND ZIP_C = '14305-1391')
+OR (STREET_C = '9 SCOBIE DR' AND STATE_C = 'NY' AND ZIP_C = '12550-3258')
+OR (STREET_C = '2558 W 16TH ST' AND STATE_C = 'IL' AND ZIP_C = '60608-1720')
+OR (STREET_C = '5102 21ST ST STE 3B' AND STATE_C = 'NY' AND ZIP_C = '11101-5838')
+OR (STREET_C = '400 PLAZA DR STE 102' AND STATE_C = 'NJ' AND ZIP_C = '07094-3605')
+OR (STREET_C = '4000 NW SAINT HELENS RD' AND STATE_C = 'OR' AND ZIP_C = '97210-1437')
+OR (STREET_C = '25 Washington Ave Ste 2200' AND STATE_C = 'NY' AND ZIP_C = '11205-1202')
+OR (STREET_C = '6900 NORTHPARK BLVD STE G' AND STATE_C = 'NC' AND ZIP_C = '28216-1393'))
+;
+--8
+
+UPDATE JCREW.LP_JCR2501_MailFile
+SET isMailed = 0
+    ,FileName = NULL
+    ,KeyCode = NULL
+WHERE Priority = 0;
+--24
+
+SELECT * FROM LP_JCR2501_MailFile
+WHERE Priority = 0
+AND LOWER(FIRST_C) IN ('lisa','halsey','ashley','candace','libby','david','amy','tracy')
+AND LOWER(LAST_C) NOT IN ('minervini');
+
+INSERT INTO JCREW.LP_JCR2501_MailFile
+(Priority,FIRST_C,LAST_C,STREET_C,CITY_C,STATE_C,ZIP_C)
+SELECT 0,'LIBBY','WADLE','49 N 8TH ST #3D','BROOKLYN','NY','11249' UNION ALL
+SELECT 0,'DAVID','SAVINI','13 W 13TH ST Apt 6HS','NEW YORK','NY','10011' UNION ALL
+SELECT 0,'AMY','TURKINGTON','16 LOWER HILLMAN RD','WARWICK','NY','10990' UNION ALL
+SELECT 0,'TRACY','BAY','105 DUANNE ST APT 48BC','NEW YORK','NY','10007'
+;
+
+UPDATE LP_JCR2501_MailFile AS MF
+SET MF.isMailed = 1
+    ,MF.FileName = 'JCR2501'
+    ,MF.KeyCode = 'SEED'
+WHERE Priority = 0
+AND LOWER(FIRST_C) IN ('lisa','halsey','ashley','candace','libby','david','amy','tracy')
+AND LOWER(LAST_C) NOT IN ('minervini');
+--8
+
+CALL JCREW.LP_ExportOutputFile('LP_JCR2501_MailFile','JCR2501');
+--CALL JCREW.LP_ExportOutputFile_WITH_SaleRevenue('LP_JCR2501_MailFile','JCR2501');
