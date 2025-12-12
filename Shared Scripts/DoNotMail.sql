@@ -3,35 +3,51 @@
 SELECT * FROM JCREW.LP_EXT_DONOTMAIL ORDER BY LIneID DESC LIMIT 100;
 
 SELECT MAX(LIneID) FROM JCREW.LP_EXT_DONOTMAIL;
---223675
+--223931
 
 INSERT INTO JCREW.LP_EXT_DONOTMAIL
-SELECT 'N/A', 'Jared','Cok','9200 Greenwood Ave N','Apt 302','Seattle','WA','32836','','','',223650,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Doug','Heichlinger','4950 Westcroft Blvd','Apt 371','Chantilly','VA','94949','','','',223651,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Kelly','Kirkwood','234 Skillman Ave','Apt 3M','Brooklyn','NY','94109','','','',223652,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Jessi','Earp','715 Rollerton Rd','Apt 406','Charlotte','NC','94114','','','',223653,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Timothy','Carpenter','2560 Polk St','Apt 8','San Francisco','CA','84664','','','',223654,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Jared','Cok','9200 Greenwood Ave N Apt 302','','Seattle','WA','94920','','','',223655,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Doug','Heichlinger','4950 Westcroft Blvd Apt 371','','Chantilly','VA','20151','','','',223656,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Kelly','Kirkwood','234 Skillman Ave Apt 3M','','Brooklyn','NY','1810','','','',223657,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Jessi','Earp','715 Rollerton Rd Apt 406','','Charlotte','NC','48009','','','',223658,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Timothy','Carpenter','2560 Polk St Apt 8','','San Francisco','CA','48302','','','',223659,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Michelle','Estevez','8443 Tangelo Tree Dr','','Orlando','FL','94611','','','',223660,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Timothy','Carpenter','1 Timothy Ct','','Novato','CA','37207','','','',223661,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Timothy','Carpenter','452 Elizabeth St','','San Francisco','CA','1034','','','',223662,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Dave','Lainhart','1001 S 1200 W ','','Mapleton','UT','65804','','','',223663,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Tracy','','15 Madrona Ave','','Belvedere','CA','19067','','','',223664,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Caitlin','Meehan','10 Copley Dr','','Andover','MA','98103','','','',223665,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Camila','Ferreira','636 E Lincoln St','','Birmingham','MI','11211','','','',223666,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Abel','Ferreira','1871 Golf Ridge Dr S','','Bloomfield Hills','MI','47304','','','',223667,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Michelle','Ferreira','55 Diablo Dr','','Oakland','CA','92625','','','',223668,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Sara','Balsom','1103B N 5th St','','Nashville','TN','92056','','','',223669,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Deborah','Phelon','641 Main Rd','','Grainville','MA','28205','','','',223670,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Marty','Davis','5063 S Barnes Ct','','Springfield','MO','','','','',223671,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Kerry','Stuhlmuller','7 Raab Dr','','Yardley','PA','','','','',223672,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Dianna','Lott','3405 W Riverside Ave','','Muncie','IN','','','','',223673,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Nicole','Kane','2630 Point Del Mar','','Corona Del Mar','CA','','','','',223674,'Manually inserted','2025-11-19' UNION ALL
-SELECT 'N/A', 'Anatasia','Khabiev','4331 Apache St','','Oceanside','CA','','','','',223675,'Manually inserted','2025-11-19'
+SELECT 'N/A', 'Marissa','Wynne','5757 Franklin Ave','Apt 208','Los Angeles','CA','90028','','','',223890,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Kelly','Jin','555 Massachusetts Ave NW','Apt 219','Washington','DC','20001','','','',223891,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Alana','Farkas','425 W Broadway','Apt 2D','New York','NY','10012','','','',223892,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Ashley ','Munday','167 Holston View Dr','Apt 306','Weaverville','NC','28787','','','',223893,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Kelly','Jin','2101 New Hampshire Ave NW','Apt 314','Washington','DC','20009','','','',223894,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Jennifer','Mota','875 W 181st St','Apt 3G','New York','NY','10033','','','',223895,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Lori','Rounsavall','625 Ocean Ave','Apt 5F','Brooklyn','NY','11226','','','',223896,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Kelly','Jin','2900 SW 98th Ln','Apt 603','Miami','FL','33133','','','',223897,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Kimberly','Paese','45 Lansing St','Apt 705','San Francisco','CA','94105','','','',223898,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Heidi','Wiersma','120 Alamitos Ave','Apt 9 ','Long Beach','CA','90802','','','',223899,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Barbara','Brant','701 W Buchanan St','Ste B','California','MO','65018','','','',223900,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Tavin','Boynton','3562 Marlborough Ave','Unit 14','San Diego','CA','92105','','','',223901,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Kathryn','Olsen','255 S Marshall Rd','Unit 202','Louisville','CO','80027','','','',223902,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Danika','Valdivia','460 Prospect Avenue','','Oradell','NJ','07649-1424','','','',223903,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Tavin','Boynton','145 S 1st St','','Helens','OR','97051','','','',223904,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Andra','Neal Stamps','11504 Parkgate Dr','','Nokesville','VA','20181','','','',223905,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'David','Carrier','24905 Coats Sq','','Aldie','VA','20105','','','',223906,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Daniel','Randel','15 Limestone Blvd','','Washington','NJ','7882','','','',223907,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Barbara','Brant','1192 Hampton Ln','','California','MO','65018','','','',223908,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Burke','Brant','507 Kentucky Bvd','','Columbia','MD','65201','','','',223909,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Danika','Valdivia','460 Prospect Ave','','Oradell','NJ','07649-1424','','','',223910,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Bernadette ','Schaffhausen','3312 Ridge Rd','','Perkasie','PA','18944','','','',223911,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Kelley ','Sura','7354 Cardinal Ln','','Longmont','CO','80503','','','',223912,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Anna ','R','111 N 11th  St Unit 1815','','Tampa ','FL','33602-3683','','','',223913,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Mark','Flynn','30 Union St Apt 6','','Cambridge','MA','2141','','','',223914,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Diane','Hiatt','300 Walnut St Unit 192','','DesMoines','IA','50309','','','',223915,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Cheryl ','Burke','4304 Heathgate Ln','','Raleigh','NC','27613','','','',223916,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Sunho','Bae','54 Sycamore St','','Belmont','MA','2478','','','',223917,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Lori','Rounsavall','135 W 2th St','','New York','NY','11226','','','',223918,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Marissa','Wynne','5757 Franklin Ave Apt 208','','Los Angeles','CA','90028','','','',223919,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Kelly','Jin','555 Massachusetts Ave NW Apt 219','','Washington','DC','20001','','','',223920,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Alana','Farkas','425 W Broadway Apt 2D','','New York','NY','10012','','','',223921,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Ashley ','Munday','167 Holston View Dr Apt 306','','Weaverville','NC','28787','','','',223922,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Kelly','Jin','2101 New Hampshire Ave NW Apt 314','','Washington','DC','20009','','','',223923,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Jennifer','Mota','875 W 181st St Apt 3G','','New York','NY','10033','','','',223924,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Lori','Rounsavall','625 Ocean Ave Apt 5F','','Brooklyn','NY','11226','','','',223925,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Kelly','Jin','2900 SW 98th Ln Apt 603','','Miami','FL','33133','','','',223926,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Kimberly','Paese','45 Lansing St Apt 705','','San Francisco','CA','94105','','','',223927,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Heidi','Wiersma','120 Alamitos Ave Apt 9 ','','Long Beach','CA','90802','','','',223928,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Barbara','Brant','701 W Buchanan St Ste B','','California','MO','65018','','','',223929,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Tavin','Boynton','3562 Marlborough Ave Unit 14','','San Diego','CA','92105','','','',223930,'Manually inserted',CURRENT_DATE() UNION ALL
+SELECT 'N/A', 'Kathryn','Olsen','255 S Marshall Rd Unit 202','','Louisville','CO','80027','','','',223931,'Manually inserted',CURRENT_DATE()
 ORDER BY 12
 ;
 
@@ -42,12 +58,12 @@ WHERE LEN(Zip) < 5;
 UPDATE JCREW.LP_EXT_DONOTMAIL
 SET ZIP = CONCAT(REPEAT('0',5-LEN(Zip)),ZIP)
 WHERE LEN(Zip) < 5;
---12056
+--3
 
 SELECT * FROM JCREW.LP_INT_AdditionalAddressSuppression ORDER BY LineID DESC LIMIT 100;
 
 SELECT MAX(LIneID) FROM JCREW.LP_INT_AdditionalAddressSuppression;
---454
+--710
 
 DELETE FROM JCREW.LP_INT_AdditionalAddressSuppression WHERE LINEID IN (
 SELECT LineID
@@ -56,32 +72,49 @@ GROUP BY LineID
 HAVING COUNT(*) > 1);
 
 INSERT INTO JCREW.LP_INT_AdditionalAddressSuppression
-SELECT 429,'9200 Greenwood Ave N','Apt 302','Seattle','WA','32836','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 430,'4950 Westcroft Blvd','Apt 371','Chantilly','VA','94949','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 431,'234 Skillman Ave','Apt 3M','Brooklyn','NY','94109','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 432,'715 Rollerton Rd','Apt 406','Charlotte','NC','94114','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 433,'2560 Polk St','Apt 8','San Francisco','CA','84664','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 434,'9200 Greenwood Ave N Apt 302','','Seattle','WA','94920','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 435,'4950 Westcroft Blvd Apt 371','','Chantilly','VA','20151','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 436,'234 Skillman Ave Apt 3M','','Brooklyn','NY','1810','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 437,'715 Rollerton Rd Apt 406','','Charlotte','NC','48009','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 438,'2560 Polk St Apt 8','','San Francisco','CA','48302','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 439,'8443 Tangelo Tree Dr','','Orlando','FL','94611','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 440,'1 Timothy Ct','','Novato','CA','37207','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 441,'452 Elizabeth St','','San Francisco','CA','1034','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 442,'1001 S 1200 W ','','Mapleton','UT','65804','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 443,'15 Madrona Ave','','Belvedere','CA','19067','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 444,'10 Copley Dr','','Andover','MA','98103','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 445,'636 E Lincoln St','','Birmingham','MI','11211','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 446,'1871 Golf Ridge Dr S','','Bloomfield Hills','MI','47304','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 447,'55 Diablo Dr','','Oakland','CA','92625','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 448,'1103B N 5th St','','Nashville','TN','92056','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 449,'641 Main Rd','','Grainville','MA','28205','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 450,'5063 S Barnes Ct','','Springfield','MO','','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 451,'7 Raab Dr','','Yardley','PA','','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 452,'3405 W Riverside Ave','','Muncie','IN','','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 453,'2630 Point Del Mar','','Corona Del Mar','CA','','Manually inserted','2025-11-19',0 UNION ALL
-SELECT 454,'4331 Apache St','','Oceanside','CA','','Manually inserted','2025-11-19',0;
+SELECT 669,'5757 Franklin Ave','Apt 208','Los Angeles','CA','90028','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 670,'555 Massachusetts Ave NW','Apt 219','Washington','DC','20001','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 671,'425 W Broadway','Apt 2D','New York','NY','10012','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 672,'167 Holston View Dr','Apt 306','Weaverville','NC','28787','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 673,'2101 New Hampshire Ave NW','Apt 314','Washington','DC','20009','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 674,'875 W 181st St','Apt 3G','New York','NY','10033','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 675,'625 Ocean Ave','Apt 5F','Brooklyn','NY','11226','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 676,'2900 SW 98th Ln','Apt 603','Miami','FL','33133','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 677,'45 Lansing St','Apt 705','San Francisco','CA','94105','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 678,'120 Alamitos Ave','Apt 9 ','Long Beach','CA','90802','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 679,'701 W Buchanan St','Ste B','California','MO','65018','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 680,'3562 Marlborough Ave','Unit 14','San Diego','CA','92105','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 681,'255 S Marshall Rd','Unit 202','Louisville','CO','80027','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 682,'460 Prospect Avenue','','Oradell','NJ','07649-1424','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 683,'145 S 1st St','','Helens','OR','97051','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 684,'11504 Parkgate Dr','','Nokesville','VA','20181','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 685,'24905 Coats Sq','','Aldie','VA','20105','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 686,'15 Limestone Blvd','','Washington','NJ','7882','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 687,'1192 Hampton Ln','','California','MO','65018','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 688,'507 Kentucky Bvd','','Columbia','MD','65201','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 689,'460 Prospect Ave','','Oradell','NJ','07649-1424','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 690,'3312 Ridge Rd','','Perkasie','PA','18944','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 691,'7354 Cardinal Ln','','Longmont','CO','80503','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 692,'111 N 11th  St Unit 1815','','Tampa ','FL','33602-3683','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 693,'30 Union St Apt 6','','Cambridge','MA','2141','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 694,'300 Walnut St Unit 192','','DesMoines','IA','50309','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 695,'4304 Heathgate Ln','','Raleigh','NC','27613','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 696,'54 Sycamore St','','Belmont','MA','2478','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 697,'135 W 2th St','','New York','NY','11226','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 698,'5757 Franklin Ave Apt 208','','Los Angeles','CA','90028','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 699,'555 Massachusetts Ave NW Apt 219','','Washington','DC','20001','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 700,'425 W Broadway Apt 2D','','New York','NY','10012','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 701,'167 Holston View Dr Apt 306','','Weaverville','NC','28787','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 702,'2101 New Hampshire Ave NW Apt 314','','Washington','DC','20009','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 703,'875 W 181st St Apt 3G','','New York','NY','10033','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 704,'625 Ocean Ave Apt 5F','','Brooklyn','NY','11226','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 705,'2900 SW 98th Ln Apt 603','','Miami','FL','33133','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 706,'45 Lansing St Apt 705','','San Francisco','CA','94105','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 707,'120 Alamitos Ave Apt 9 ','','Long Beach','CA','90802','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 708,'701 W Buchanan St Ste B','','California','MO','65018','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 709,'3562 Marlborough Ave Unit 14','','San Diego','CA','92105','Manually inserted',CURRENT_DATE(),0 UNION ALL
+SELECT 710,'255 S Marshall Rd Unit 202','','Louisville','CO','80027','Manually inserted',CURRENT_DATE(),0 
+;
 
 SELECT CONCAT(REPEAT('0',5-LEN(Zip)),ZIP)
 FROM JCREW.LP_INT_AdditionalAddressSuppression
@@ -90,4 +123,4 @@ WHERE LEN(Zip) < 5;
 UPDATE JCREW.LP_INT_AdditionalAddressSuppression
 SET ZIP = CONCAT(REPEAT('0',5-LEN(Zip)),ZIP)
 WHERE LEN(Zip) < 5;
---22
+--8
