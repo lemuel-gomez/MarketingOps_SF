@@ -2,7 +2,7 @@
 ----- DMA ------------------------------------------------------
 ----------------------------------------------------------------
 
-TRUNCATE TABLE MPS_FULL;
+TRUNCATE TABLE PUBLIC.MPS_FULL;
 TRUNCATE TABLE PUBLIC.LP_LK_DMA;
 INSERT INTO PUBLIC.LP_LK_DMA
 SELECT LAST_NAME,FIRST_NAME,CARE_OF,ADDRESS,CITY,STATE,ZIP,ZIP4,DECEASED,CATALOG,PRINT_MEDIA,OTHER_MAIL
