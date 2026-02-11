@@ -185,42 +185,110 @@ SET isMailed = 0
 WHERE (isMailed = 1 OR isholdout = 1);
 --143756
 
-CREATE OR REPLACE TEMPORARY TABLE tmpSelection AS
-SELECT LineID,SaleRevenue_L12M,Priority
+CREATE OR REPLACE TEMPORARY TABLE tmpHoldout AS
+SELECT LineID
 FROM JCREW.LP_JCR2601_MailFile
 WHERE isSelected = 1 AND Priority = 1
-ORDER BY CAST(CASE WHEN SaleRevenue_L12M = '' THEN 0 ELSE SaleRevenue_L12M END AS FLOAT) DESC
-LIMIT 15000
+ORDER BY RANDOM()
+LIMIT 4979
 ;
 
-SELECT COUNT(*) FROM tmpSelection;
---15000
+INSERT INTO tmpHoldout
+SELECT LineID
+FROM JCREW.LP_JCR2601_MailFile
+WHERE isSelected = 1 AND Priority = 2
+ORDER BY RANDOM()
+LIMIT 2931
+;
+
+INSERT INTO tmpHoldout
+SELECT LineID
+FROM JCREW.LP_JCR2601_MailFile
+WHERE isSelected = 1 AND Priority = 3
+ORDER BY RANDOM()
+LIMIT 5405
+;
+
+SELECT COUNT(*) FROM tmpHoldout;
+--13315
 
 ALTER TABLE LP_JCR2601_MailFile ALTER COLUMN KeyCode VARCHAR(32);
 
 UPDATE LP_JCR2601_MailFile AS MF
-SET MF.isMailed = 1
-    ,MF.FileName = 'JCR2601_Top15k'
-    ,MF.KeyCode = 'TOP'
-FROM tmpSelection AS M
+SET MF.isHoldout = 1
+    ,MF.FileName = 'JCR2601_Holdout'
+    ,MF.KeyCode = CASE WHEN Priority = 1 THEN 'SPR2601_H'
+                    WHEN Priority = 2 THEN 'FALL2601_H'
+                    WHEN Priority = 3 THEN 'HLDY2601_H' END                    
+FROM tmpHoldout AS M
 WHERE MF.LineID = M.LineID;
---15000
+--13315
 
-/*
+
 UPDATE LP_JCR2601_MailFile
 SET isMailed = 1
-    ,FileName = 'JCR2601_Top10k'
-    ,KeyCode = 'TOPSEEDS'
+    ,FileName = 'JCR2601'
+    ,KeyCode = CASE WHEN Priority = 1 THEN 'SPR2601'
+                    WHEN Priority = 2 THEN 'FALL2601'
+                    WHEN Priority = 3 THEN 'HLDY2601' END
+WHERE isSelected = 1 AND Priority IN (1,2,3) AND COALESCE(isHoldout,0) != 1;
+--119821
+
+UPDATE LP_JCR2601_MailFile
+SET isMailed = 1
+    ,FileName = 'JCR2601'
+    ,KeyCode = 'SEED2601'
 WHERE isSelected = 1 AND Priority = 0;
---24
-*/
+--5
+
 
 SELECT Priority,isMailed,isHoldout,COUNT(*),FileName,KeyCode
 FROM JCREW.LP_JCR2601_MailFile
-WHERE isMailed = 1
+WHERE isMailed = 1 OR isHoldout = 1
 GROUP BY Priority,isMailed,isHoldout,FileName,KeyCode
 ORDER BY Priority,isMailed,isHoldout,FileName;
 
-CALL JCREW.LP_ExportOutputFile('LP_JCR2601_MailFile','JCR2601_Top15k');
-CALL JCREW.LP_EXPORTOUTPUTFILE_SORTED_SALEREVENUE('LP_JCR2601_MailFile','JCR2601_Top15k');
-CALL JCREW.LP_ExportOutputFile_WITH_SaleRevenue('LP_JCR2601_MailFile','JCR2601_Top15k');
+--ALTER TABLE LP_JCR2601_MailFile DROP COLUMN UPC_Prefix;
+ALTER TABLE LP_JCR2601_MailFile ADD UPC_Prefix VARCHAR;
+
+CREATE OR REPLACE TEMPORARY TABLE tmpRanking
+AS
+SELECT LineID,Priority,ROW_NUMBER() OVER(ORDER BY RANDOM()) AS RK
+FROM LP_JCR2601_MailFile
+WHERE (ismailed = 1 OR isHoldout =1) AND Priority IN (0,1,2,3)
+;
+
+SELECT * FROM tmpRanking ORDER BY RK,Priority;
+
+CALL PUBLIC.LP_AGL_ADDLINEID('JCREW','LP_JCR2601_MAILFILE_UPC');
+
+SELECT COUNT(*) FROM LP_JCR2601_MAILFILE_UPC;
+
+CREATE OR REPLACE TEMPORARY TABLE tmpUPC_Prefix
+AS
+SELECT MF.LineID,PC.UPC AS UPC_Prefix,MF.Priority
+FROM tmpRanking AS MF
+INNER JOIN LP_JCR2601_MAILFILE_UPC AS PC
+    ON MF.RK = PC.LineID
+;
+
+SELECT * FROM tmpUPC_Prefix;
+
+UPDATE LP_JCR2601_MailFile MF
+SET MF.UPC_Prefix = PF.UPC_Prefix
+FROM tmpUPC_Prefix AS PF
+WHERE MF.LineID = PF.LineID
+;
+
+SELECT DISTINCT Priority,LEFT(UPC_PREFIX,3),KeyCOde
+FROM LP_JCR2601_MailFile
+WHERE isMailed = 1 OR isHoldout = 1;
+
+SELECT UPC_Prefix,COUNT(*)
+FROM LP_JCR2601_MailFile
+WHERE isMailed = 1 OR isHoldout = 1
+GROUP BY UPC_Prefix
+HAVING COUNT(*) > 1;
+
+CALL JCREW.LP_EXPORTOUTPUTFILE_WITH_UPC_PREFIX('LP_JCR2601_MailFile','JCR2601');
+CALL JCREW.LP_EXPORTOUTPUTFILE_WITH_UPC_PREFIX('LP_JCR2601_MailFile','JCR2601_Holdout');
