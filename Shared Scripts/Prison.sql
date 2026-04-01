@@ -2,9 +2,9 @@
 ----- Prison ---------------------------------------------------
 ----------------------------------------------------------------
 
-DROP TABLE LP_LK_Prison_AZ;
+TRUNCATE TABLE LP_LK_Prison_AZ;
 
---Load Prison file to LP_LK_Prison_AZ (Create new table)
+--Load Prison file to LP_LK_Prison_AZ 
 
 SELECT * FROM PUBLIC.LP_LK_Prison_AZ;
 
