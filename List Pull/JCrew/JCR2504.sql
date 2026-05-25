@@ -210,3 +210,9 @@ ORDER BY Priority,isMailed,isHoldout,FileName;
 CALL JCREW.LP_ExportOutputFile('LP_JCR2504_MailFile','JCR2504_Top15k');
 CALL JCREW.LP_EXPORTOUTPUTFILE_SORTED_SALEREVENUE('LP_JCR2504_MailFile','JCR2504_Top15k');
 CALL JCREW.LP_ExportOutputFile_WITH_SaleRevenue('LP_JCR2504_MailFile','JCR2504_Top15k');
+
+SELECT * FROM LP_JCR2601_MAILFILE
+WHERE LOWER(address1) LIKE '%3013%newsom%'
+OR LOWER(street_c) LIKE '%3013%newsom%'
+OR (LOWER(FirstName) LIKE '%debbie%' AND LOWER(LastName) LIKE '%oestreicher%')
+OR (LOWER(FirstName) LIKE '%stephen%' AND LOWER(LastName) LIKE '%booher%');
